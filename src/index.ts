@@ -1,6 +1,9 @@
 import fastify from "fastify";
 import router from "./routes/router";
-import '@dotenvx/dotenvx/config'
+
+if (process.env.NODE_ENV !== 'production') {
+  import('@dotenvx/dotenvx').then(({ config }) => config())
+}
 
 const app = fastify({
   logger: true,
