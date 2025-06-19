@@ -1,5 +1,6 @@
 import fastify from "fastify";
 import router from "./routes/router";
+import '@dotenvx/dotenvx/config'
 
 const app = fastify({
   logger: true,
@@ -8,7 +9,7 @@ const app = fastify({
 app.register(router)
 
 try {
-  await app.listen({ port: 3001,  })
+  await app.listen({ port: Number(process.env.PORT) || 4000,  })
 } catch (error) {
   app.log.error(error);
   process.exit(1);  
