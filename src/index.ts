@@ -1,5 +1,6 @@
 import fastify from "fastify";
 import router from "./routes/router";
+import rabbit from "./config/rabbit";
 
 if (process.env.NODE_ENV !== 'production') {
   import('@dotenvx/dotenvx').then(({ config }) => config())
@@ -9,6 +10,7 @@ const app = fastify({
   logger: true,
 });
 
+app.register(rabbit)
 app.register(router)
 
 try {
